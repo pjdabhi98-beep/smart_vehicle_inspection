@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- Vehicle List -->
+    <record id="view_smart_vehicle_tree" model="ir.ui.view">
+        <field name="name">smart.vehicle.tree</field>
+        <field name="model">smart.vehicle</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="registration_no"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vehicle Form -->
+    <record id="view_smart_vehicle_form" model="ir.ui.view">
+        <field name="name">smart.vehicle.form</field>
+        <field name="model">smart.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="registration_no"/>
+                        <field name="active"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Inspections">
+                            <field name="inspection_ids">
+                                <list>
+                                    <field name="inspection_date"/>
+                                    <field name="tyre_condition"/>
+                                    <field name="brake_condition"/>
+                                    <field name="engine_condition"/>
+                                    <field name="overall_status"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inspection List -->
+    <record id="view_smart_inspection_tree" model="ir.ui.view">
+        <field name="name">smart.vehicle.inspection.tree</field>
+        <field name="model">smart.vehicle.inspection</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="vehicle_id"/>
+                <field name="inspection_date"/>
+                <field name="fuel_level"/>
+                <field name="tyre_condition"/>
+                <field name="brake_condition"/>
+                <field name="engine_condition"/>
+                <field name="overall_status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Inspection Form -->
+    <record id="view_smart_inspection_form" model="ir.ui.view">
+        <field name="name">smart.vehicle.inspection.form</field>
+        <field name="model">smart.vehicle.inspection</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="vehicle_id"/>
+                        <field name="inspection_date"/>
+                    </group>
+
+                    <group string="Vehicle Condition">
+                        <field name="fuel_level"/>
+                        <field name="tyre_condition"/>
+                        <field name="brake_condition"/>
+                        <field name="engine_condition"/>
+                        <field name="overall_status"/>
+                    </group>
+
+                    <group>
+                        <field name="remarks"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vehicle Action -->
+    <record id="action_smart_vehicle" model="ir.actions.act_window">
+        <field name="name">Vehicles</field>
+        <field name="res_model">smart.vehicle</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Inspection Action -->
+    <record id="action_smart_inspection" model="ir.actions.act_window">
+        <field name="name">Inspections</field>
+        <field name="res_model">smart.vehicle.inspection</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem
+        id="menu_smart_vehicle_root"
+        name="Vehicle Inspection"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_smart_vehicle"
+        name="Vehicles"
+        parent="menu_smart_vehicle_root"
+        action="action_smart_vehicle"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_smart_inspection"
+        name="Inspections"
+        parent="menu_smart_vehicle_root"
+        action="action_smart_inspection"
+        sequence="20"/>
+
+</odoo>
